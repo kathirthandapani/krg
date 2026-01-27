@@ -16,7 +16,7 @@ const client = new twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 const otps = {};
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 app.use(express.static('.')); // Serve static files from current directory
 
 // Database Setup
-const dbPath = process.env.RENDER_DISK_MOUNT_PATH
-    ? path.join(process.env.RENDER_DISK_MOUNT_PATH, 'database.sqlite')
+const dbPath = process.env.NODE_ENV === 'production'
+    ? '/data/database.sqlite'
     : './database.sqlite';
 
 const db = new sqlite3.Database(dbPath, (err) => {
