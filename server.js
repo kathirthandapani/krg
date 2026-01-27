@@ -25,6 +25,9 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(bodyParser.json());
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok' });
+});
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
