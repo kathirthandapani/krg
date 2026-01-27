@@ -25,6 +25,9 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(bodyParser.json());
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 app.use(express.static('.')); // Serve static files from current directory
 
 // Database Setup
