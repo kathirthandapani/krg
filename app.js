@@ -1,6 +1,6 @@
 window.App = {
     _initialized: false,
-    API_BASE_URL: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:3000' : window.location.origin,
+    API_BASE_URL: window.location.protocol === 'file:' ? 'http://localhost:3000' : '',
     // Views
     views: {
         home: `
@@ -592,7 +592,7 @@ window.App = {
                 alert(data.error);
             }
         } catch (err) {
-            alert("Connection Failed");
+            alert(`Registration Connection Failed!\n\nTarget: ${this.API_BASE_URL || window.location.origin}/api/register\n\nPlease ensure your device is on the same Wi-Fi and the server is running.`);
         }
     },
 
