@@ -11,6 +11,19 @@ window.App = {
                 </div>
                 
                 <div class="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
+                    <div class="mb-4 inline-flex items-center gap-1 px-3 py-1 rounded bg-black/50 backdrop-blur border border-primary/50 text-primary text-[10px] md:text-xs font-bold uppercase tracking-wider mx-auto">
+                        <span class="material-icons-round text-sm">engineering</span>
+                        Since 2010
+                    </div>
+                    <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-4 leading-[1.1] uppercase tracking-wide drop-shadow-lg">
+                        Foundation <br/>
+                        <span class="text-primary">For Your</span> <br/>
+                        Future
+                    </h1>
+                    <p class="text-gray-200 mb-8 max-w-lg mx-auto text-sm md:text-base font-medium drop-shadow-md">
+                        Premium building materials and professional earth moving services in Dindigul. We build trust with every load.
+                    </p>
+                    
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <a href="#/catalog" class="group px-8 py-4 bg-white text-black font-bold rounded-xl shadow-2xl hover:bg-primary transition-all flex items-center gap-3 active:scale-95">
