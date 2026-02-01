@@ -321,7 +321,10 @@ window.App = {
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-500 mb-2">Phone Number</label>
-                            <input type="tel" name="phone" required class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-primary" placeholder="e.g. 9944748140">
+                            <input type="tel" name="phone" required pattern="[0-9]{10}" maxlength="10" 
+                                   class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 border-none focus:ring-2 focus:ring-primary" 
+                                   placeholder="10-digit mobile number" title="Please enter exactly 10 digits" 
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)">
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-gray-500 mb-2">Password</label>
@@ -608,6 +611,11 @@ window.App = {
         const username = e.target.username.value;
         const phone = e.target.phone.value;
         const password = e.target.password.value;
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+            alert("Error: Phone number must be exactly 10 digits.");
+            return;
+        }
 
         try {
             const res = await fetch(`${this.API_BASE_URL}/api/register`, {
@@ -1148,7 +1156,11 @@ window.App = {
                             <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Your Mobile Number</label>
                             <div class="relative group">
                                 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-icons-round text-gray-400 text-sm group-focus-within:text-primary transition-colors">phone</span>
-                                <input type="tel" name="phone" required class="w-full text-sm pl-11 pr-4 py-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border-2 border-transparent focus:border-primary/20 focus:bg-white dark:focus:bg-gray-900 outline-none transition-all" placeholder="e.g. 9876543210" value="${this._bookingState.phone}" />
+                                <input type="tel" name="phone" required pattern="[0-9]{10}" maxlength="10" 
+                                       class="w-full text-sm pl-11 pr-4 py-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border-2 border-transparent focus:border-primary/20 focus:bg-white dark:focus:bg-gray-900 outline-none transition-all" 
+                                       placeholder="10-digit mobile number" title="Please enter exactly 10 digits" 
+                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                                       value="${this._bookingState.phone}" />
                             </div>
                         </div>
                         <div class="space-y-1.5">
@@ -1175,7 +1187,14 @@ window.App = {
     async handleBookingNext(e) {
         e.preventDefault();
         const f = e.target;
-        this._bookingState.phone = f.phone.value;
+        const phone = f.phone.value;
+
+        if (!/^[0-9]{10}$/.test(phone)) {
+            alert("Error: Phone number must be exactly 10 digits.");
+            return;
+        }
+
+        this._bookingState.phone = phone;
         this._bookingState.place = f.place.value;
 
         this.submitBooking();

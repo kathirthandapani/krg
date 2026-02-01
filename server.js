@@ -229,6 +229,11 @@ app.post('/api/register', (req, res) => {
     const { username, password, phone } = req.body;
     if (!username || !password || !phone) return res.status(400).json({ error: 'Missing fields' });
 
+    // Validate Phone Number: Exactly 10 digits
+    if (!/^[0-9]{10}$/.test(phone)) {
+        return res.status(400).json({ error: 'Phone number must be exactly 10 digits' });
+    }
+
     const saltRounds = 10;
     bcrypt.hash(password, saltRounds, (err, hash) => {
         if (err) return res.status(500).json({ error: 'Server error' });
