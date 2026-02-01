@@ -6,7 +6,7 @@ window.App = {
         home: `
             <header class="relative w-full h-[50vh] sm:h-[60vh] md:h-[500px] flex items-end overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <img alt="Excavator at construction site" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop"/>
+                    <img alt="Premium Construction Site" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2000&auto=format&fit=crop"/>
                     <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent opacity-90"></div>
                 </div>
                 <div class="relative z-10 px-6 pb-10 w-full max-w-7xl mx-auto">
