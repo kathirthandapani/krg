@@ -9,8 +9,9 @@ const twilio = require('twilio');
 // Twilio Configuration
 const TWILIO_ACCOUNT_SID = 'AC56733acf25a8df8b233e9ffe8b41edcd';
 const TWILIO_AUTH_TOKEN = 'b10fab4798a065aa37815c7113cc4e76';
-const TWILIO_PHONE_NUMBER = '+12297159583'; // Valid Twilio Virtual Number
+const TWILIO_PHONE_NUMBER = '+12297159583';
 const client = new twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+const { exec } = require('child_process');
 
 // In-memory OTP storage for demo
 const otps = {};
@@ -513,6 +514,23 @@ app.post('/api/admin/users', (req, res) => {
                 res.json({ message: 'User created successfully', id: this.lastID });
             }
         );
+    });
+});
+
+// Admin: Sync to GitHub
+app.post('/api/admin/sync', (req, res) => {
+    const { role } = req.body;
+    if (role !== 'admin') return res.status(403).json({ error: 'Unauthorized' });
+
+    console.log('[ADMIN] Starting GitHub Sync/Push...');
+
+    exec('git add . && git commit -m "Admin UI Sync Update" && git push origin main', (err, stdout, stderr) => {
+        if (err) {
+            console.error('[GIT ERROR]', stderr);
+            return res.status(500).json({ error: 'Git Sync Failed', details: stderr });
+        }
+        console.log('[GIT SUCCESS]', stdout);
+        res.json({ message: 'GitHub Sync Successful!', output: stdout });
     });
 });
 

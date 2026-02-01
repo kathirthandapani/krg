@@ -516,6 +516,7 @@ window.App = {
         const adminUsersMobileLink = document.getElementById('nav-users-mobile');
         const addProductBtn = document.getElementById('add-product-btn');
         const updateRatesBtn = document.getElementById('update-rates-btn');
+        const navSync = document.getElementById('nav-sync');
 
         // Drawer elements
         const drawerLogin = document.getElementById('drawer-login');
@@ -572,6 +573,7 @@ window.App = {
         // View-specific buttons
         if (addProductBtn) addProductBtn.classList.toggle('hidden', !isAdmin);
         if (updateRatesBtn) updateRatesBtn.classList.toggle('hidden', !isAdmin);
+        if (navSync) navSync.classList.toggle('hidden', !isAdmin);
     },
 
     async login(e) {
@@ -1463,6 +1465,36 @@ window.App = {
         if (drawer && content) {
             drawer.classList.add('pointer-events-none', 'opacity-0');
             content.classList.add('translate-x-full');
+        }
+    },
+
+    async syncToGitHub() {
+        if (!this.currentUser || this.currentUser.role !== 'admin') return;
+
+        const btn = document.getElementById('nav-sync');
+        const originalHtml = btn.innerHTML;
+
+        btn.disabled = true;
+        btn.innerHTML = `<span class="material-icons-round animate-spin text-sm">sync</span> SYNCING...`;
+
+        try {
+            const res = await fetch(`${this.API_BASE_URL}/api/admin/sync`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ role: this.currentUser.role })
+            });
+            const data = await res.json();
+
+            if (res.ok) {
+                alert("GitHub Sync Successful!\n\nChanges are now live on GitHub Pages.");
+            } else {
+                alert("Sync Error: " + data.error);
+            }
+        } catch (err) {
+            alert("Connection error. Is the server running?");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
         }
     }
 };
