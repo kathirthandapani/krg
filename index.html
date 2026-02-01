@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRG Building Materials & Earth Movers | Antigravity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>KRG Building Materials & Earth Movers | Premium Earth Moving</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -28,64 +28,14 @@
             },
         };
 
-        // Theme Management
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-        }
-
-        // View Management / Routing
-        const routes = {
-            '#/home': 'home-view',
-            '#/catalog': 'catalog-view',
-            '#/today-rates': 'today-rates-view',
-            '#/dashboard': 'dashboard-view',
-            '#/orders': 'orders-view',
-            '#/history': 'history-view',
-            '#/users': 'users-view',
-            '#/login': 'login-view',
-            '#/register': 'register-view'
-        };
-
-        function navigate() {
-            const hash = window.location.hash || '#/home';
-            const viewId = routes[hash] || 'home-view';
-
-            document.querySelectorAll('.view').forEach(view => {
-                view.classList.remove('active');
-            });
-
-            const activeView = document.getElementById(viewId);
-            if (activeView) {
-                activeView.classList.add('active');
-                window.scrollTo(0, 0);
-            }
-
-            // Let App handle the specific view logic
-            if (window.App && typeof App.render === 'function') {
-                App.render();
-            }
-
-            // Update Nav Active States
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.toggle('text-primary', link.getAttribute('href') === hash);
-                link.classList.toggle('text-gray-400', link.getAttribute('href') !== hash);
-            });
-        }
-
-        window.addEventListener('hashchange', navigate);
         window.addEventListener('load', () => {
             if (localStorage.getItem('theme') === 'dark') {
                 document.documentElement.classList.add('dark');
             }
 
-            // Check if App is loaded and initialize if it hasn't been yet
+            // Let App handle everything
             if (window.App && typeof App.init === 'function') {
-                if (!App._initialized) {
-                    App.init();
-                }
-            } else {
-                navigate();
+                App.init();
             }
         });
     </script>
@@ -103,7 +53,7 @@
                         class="w-10 h-10 bg-primary flex items-center justify-center rounded text-black font-display font-bold text-xl tracking-tighter shadow-lg">
                         KRG
                     </div>
-                    <div class="hidden sm:flex flex-col">
+                    <div class="flex flex-col">
                         <div class="flex items-center gap-2">
                             <span
                                 class="font-display font-bold text-lg leading-none tracking-tight text-gray-900 dark:text-white uppercase">KRG</span>
@@ -217,6 +167,58 @@
         <div id="register-view" class="view"></div>
     </main>
 
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobile-drawer"
+        class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
+        <div id="drawer-content"
+            class="absolute top-0 right-0 h-full w-4/5 max-w-sm bg-white dark:bg-surface-dark shadow-2xl transform translate-x-full transition-transform duration-300">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 bg-primary rounded flex items-center justify-center text-black font-bold font-display">
+                        K</div>
+                    <span class="font-display font-bold dark:text-white uppercase tracking-tight">Navigation</span>
+                </div>
+                <button onclick="App.closeMobileMenu()"
+                    class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition text-gray-400">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <a href="#/home"
+                    class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-bold text-gray-500 dark:text-gray-400">
+                    <span class="material-icons-round text-primary">home</span> Home
+                </a>
+                <a href="#/catalog"
+                    class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-bold text-gray-500 dark:text-gray-400">
+                    <span class="material-icons-round text-primary">category</span> Catalog
+                </a>
+                <a href="#/today-rates"
+                    class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-bold text-gray-500 dark:text-gray-400">
+                    <span class="material-icons-round text-primary">trending_up</span> Today Rates
+                </a>
+                <a href="#/dashboard"
+                    class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-bold text-gray-500 dark:text-gray-400">
+                    <span class="material-icons-round text-primary">dashboard</span> Dashboard
+                </a>
+                <div class="pt-4 border-t border-gray-100 dark:border-gray-800 space-y-2">
+                    <a href="#/login" id="drawer-login"
+                        class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-bold text-gray-500 dark:text-gray-400">
+                        <span class="material-icons-round text-primary">login</span> Login
+                    </a>
+                    <a href="#/register" id="drawer-register"
+                        class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-bold text-gray-500 dark:text-gray-400">
+                        <span class="material-icons-round text-primary">person_add</span> Register
+                    </a>
+                    <a href="#" id="drawer-logout" onclick="App.logout()"
+                        class="flex items-center gap-4 p-4 rounded-xl text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors font-bold hidden">
+                        <span class="material-icons-round">logout</span> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Navigation (Mobile) -->
     <nav
         class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 z-50">
@@ -241,10 +243,10 @@
                 <span class="material-icons-round">dashboard</span>
                 <span class="text-[10px] font-medium mt-1">Dashboard</span>
             </a>
-            <a href="#/users" id="nav-users-mobile"
-                class="nav-link hidden flex flex-col items-center justify-center text-gray-400 hover:text-primary transition-colors">
-                <span class="material-icons-round">people</span>
-                <span class="text-[10px] font-medium mt-1">Users</span>
+            <a href="#/login" id="nav-login-mobile"
+                class="nav-link flex flex-col items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                <span class="material-icons-round">person</span>
+                <span class="text-[10px] font-medium mt-1">Login</span>
             </a>
         </div>
     </nav>

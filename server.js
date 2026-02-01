@@ -123,7 +123,7 @@ function initDb() {
                         description: 'Premium filtered sand for construction foundations.',
                         price: '₹4,500',
                         unit: '/ Unit',
-                        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqvw2mM46N37gZmFMXVmL8EmXi8pLMB_vWwzjA1K7Hp9FW8dJcUf2Ww3oZpcSIaNLS4NOAaQYV2_q-C8LRy3xqjZUdo3NQT6nafjYvhQ14gPlBSaIpXirD94L68AbqQTCzn0_T9SSpfnyvpkJ_PYgwEgN3hhf7EWjrfAy2lTFUBP15Mt987f_4UJMGgYhsHEA-QtHaKokSQf43rqC6TnzkorgQZ2dKq1BoCzp3o6i_pJsFncjDcbbcng3Lq5Z7RoiLmTguDf4bd1w',
+                        image: 'https://images.unsplash.com/photo-1533044309907-0fa341b59346?q=80&w=800&auto=format&fit=crop',
                         category: 'River Sand',
                         badge_text: 'Best Seller',
                         badge_color: 'bg-green-500'
@@ -136,7 +136,7 @@ function initDb() {
                         description: 'High-grade crushed stone aggregates for concrete.',
                         price: '₹3,200',
                         unit: '/ Unit',
-                        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDlJdluCHzwV8kCPY7XP06B6bWbPtOCSYry36lIII6_j89JaiR0AWzhLyTXt9kq-RK7LU2o0_EsiIXMg-bBJLj1Yu5Wvtl3jRZfFQXMxMQy7NOC85tnhj-ruz7oq5PWJnNX2kree3xYUASarGB5kQcfPbahPrTwjq-wkwqnZlksggpgbZQblr8h67Qb1m5zdbytkO2VldYgRlQCbzdF703fjVccNpf_E19m_58SLufFIsmAHg4dmW0vD_ghlherdYq-B06kPeCOcK4',
+                        image: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=800&auto=format&fit=crop',
                         category: 'Aggregates',
                         badge_text: '',
                         badge_color: ''

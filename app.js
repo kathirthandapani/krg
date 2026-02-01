@@ -6,7 +6,7 @@ window.App = {
         home: `
             <header class="relative w-full h-[50vh] sm:h-[60vh] md:h-[500px] flex items-end overflow-hidden">
                 <div class="absolute inset-0 z-0">
-                    <img alt="Excavator at construction site" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHQqUASKb_fqoY3BYrlAFobOxrwUZby9atqanfdxbJqqwXdj0VDEfTCXnXwfcp54hj27b2HQEaAG9EHTy11hyrwihEYnsFnlnNQ4k-XQgOHgsOIsSsu-GQpcSXCjWgZfd7fZkRQvmvgoN07v3-WXCAkL-booMpvcMO6GpuHvQxIFAUfkrtd36vYmfnqLFDDY2uoGjHNyRO9OuamEprqObK82tFqDEKjjVc5NjaN8a5NYIoXqMTANbP9tgZH4YoiIacggl02fEMpoo"/>
+                    <img alt="Excavator at construction site" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop"/>
                     <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent opacity-90"></div>
                 </div>
                 <div class="relative z-10 px-6 pb-10 w-full max-w-7xl mx-auto">
@@ -131,7 +131,7 @@ window.App = {
                         <p class="text-gray-500 dark:text-gray-400">Welcome back, K.R. Gandhi. Track your site progress and orders.</p>
                     </div>
                     <div class="flex items-center gap-3">
-                        <img alt="User" class="w-12 h-12 rounded-full border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAhT9KePMAg5L_5Yb1BJJGNYQAj7EpnTpQaj29YZKyAFuSKX9o-WI0uietcfDrBEU3wN0yMMqcvrcZb1WtrawWUZseMTNct91kpEykjA0Bo7CUL108kveTemnMP_ubmZOtdSf0iZFCffPlwBcRr9g3BZGL7W2f-NNSPncrAchNlq0oaLro97g_iuGDi3Xdp60K1xiE6iJNE2Bbk6BiT65U1aMcBBPrNBPpEtAsgJTFcRjohGcTo7dLNX4MIyhVgbhbVgMjedbAoKE"/>
+                        <img alt="User" class="w-12 h-12 rounded-full border-2 border-primary object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop"/>
                         <div>
                             <p class="text-sm font-bold">K.R. Gandhi</p>
                             <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold uppercase">Prime Client</span>
@@ -299,6 +299,14 @@ window.App = {
                         </button>
                     </form>
                     <p class="mt-6 text-center text-sm text-gray-500">Don't have an account? <a href="#/register" class="text-primary font-bold hover:underline">Register</a></p>
+                    <div class="mt-10 pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col items-center gap-4 opacity-40">
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Compatible with all your devices</p>
+                        <div class="flex gap-8">
+                            <span class="material-icons-round text-2xl">smartphone</span>
+                            <span class="material-icons-round text-2xl">laptop</span>
+                            <span class="material-icons-round text-2xl">desktop_windows</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         `,
@@ -509,6 +517,14 @@ window.App = {
         const addProductBtn = document.getElementById('add-product-btn');
         const updateRatesBtn = document.getElementById('update-rates-btn');
 
+        // Drawer elements
+        const drawerLogin = document.getElementById('drawer-login');
+        const drawerRegister = document.getElementById('drawer-register');
+        const drawerLogout = document.getElementById('drawer-logout');
+
+        // Mobile bottom nav elements
+        const navLoginMobile = document.getElementById('nav-login-mobile');
+
         const isAdmin = this.currentUser && this.currentUser.role === 'admin';
 
         if (this.currentUser) {
@@ -518,31 +534,44 @@ window.App = {
                 logoutLink.classList.remove('hidden');
                 logoutLink.textContent = `Logout (${this.currentUser.username})`;
             }
-            if (adminHistoryLink) {
-                adminHistoryLink.classList.toggle('hidden', !isAdmin);
+            if (drawerLogin) drawerLogin.classList.add('hidden');
+            if (drawerRegister) drawerRegister.classList.add('hidden');
+            if (drawerLogout) {
+                drawerLogout.classList.remove('hidden');
+                drawerLogout.querySelector('span:last-child').textContent = `Logout (${this.currentUser.username})`;
             }
-            if (adminUsersLink) {
-                adminUsersLink.classList.toggle('hidden', !isAdmin);
+            if (navLoginMobile) {
+                navLoginMobile.href = "#/history"; // Link to history for logged in users
+                navLoginMobile.querySelector('span:last-child').textContent = "Activity";
+                navLoginMobile.querySelector('.material-icons-round').textContent = "history";
             }
-            if (adminUsersMobileLink) {
-                adminUsersMobileLink.classList.toggle('hidden', !isAdmin);
-            }
+
+            if (adminHistoryLink) adminHistoryLink.classList.toggle('hidden', !isAdmin);
+            if (adminUsersLink) adminUsersLink.classList.toggle('hidden', !isAdmin);
+            if (adminUsersMobileLink) adminUsersMobileLink.classList.toggle('hidden', !isAdmin);
         } else {
             if (loginLink) loginLink.classList.remove('hidden');
             if (registerLink) registerLink.classList.remove('hidden');
             if (logoutLink) logoutLink.classList.add('hidden');
+
+            if (drawerLogin) drawerLogin.classList.remove('hidden');
+            if (drawerRegister) drawerRegister.classList.remove('hidden');
+            if (drawerLogout) drawerLogout.classList.add('hidden');
+
+            if (navLoginMobile) {
+                navLoginMobile.href = "#/login";
+                navLoginMobile.querySelector('span:last-child').textContent = "Login";
+                navLoginMobile.querySelector('.material-icons-round').textContent = "person";
+            }
+
             if (adminHistoryLink) adminHistoryLink.classList.add('hidden');
             if (adminUsersLink) adminUsersLink.classList.add('hidden');
             if (adminUsersMobileLink) adminUsersMobileLink.classList.add('hidden');
         }
 
         // View-specific buttons
-        if (addProductBtn) {
-            addProductBtn.classList.toggle('hidden', !isAdmin);
-        }
-        if (updateRatesBtn) {
-            updateRatesBtn.classList.toggle('hidden', !isAdmin);
-        }
+        if (addProductBtn) addProductBtn.classList.toggle('hidden', !isAdmin);
+        if (updateRatesBtn) updateRatesBtn.classList.toggle('hidden', !isAdmin);
     },
 
     async login(e) {
@@ -568,7 +597,8 @@ window.App = {
             }
         } catch (err) {
             console.error(err);
-            alert(`Connection Failed!\n\nTarget: ${this.API_BASE_URL}/api/login\n\nPlease ensure the server is running at http://localhost:3000 and try again.\n\nFinal Login Summary:\n* Admin: admin / admin123\n* Default User: tester / tester123`);
+            const host = window.location.host;
+            alert(`Connection Failed!\n\nTarget: ${this.API_BASE_URL || window.location.origin}/api/login\n\nTips for Mobile/Laptop users:\n1. If on phone, ensure you are using the laptop IP (e.g. http://${host.includes('localhost') ? '192.168.1.X' : host})\n2. Ensure the server.js is running and 0.0.0.0 is used.\n3. Check if your Firewall allows Port 3000.`);
         }
     },
 
@@ -607,12 +637,12 @@ window.App = {
         // Support and Call Buttons
         document.querySelectorAll('button, a').forEach(el => {
             const text = el.textContent.toLowerCase();
-            if (text.includes('call') || text.includes('support')) {
+            // Only attach if it's explicitly a call button and doesn't already have an href="tel:"
+            if ((text.includes('call now') || text.includes('contact support')) && !el.getAttribute('href')?.startsWith('tel:')) {
                 el.onclick = (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    const phone = "9944748140";
-                    window.location.href = `tel:${phone}`;
+                    window.location.href = `tel:9944748140`;
                 };
             }
         });
@@ -1133,45 +1163,16 @@ window.App = {
                                 <textarea name="place" required rows="3" class="w-full text-sm pl-11 pr-4 py-3.5 rounded-2xl bg-black/5 dark:bg-white/5 border-2 border-transparent focus:border-primary/20 focus:bg-white dark:focus:bg-gray-900 outline-none transition-all resize-none" placeholder="Enter full address or site details...">${this._bookingState.place}</textarea>
                             </div>
                         </div>
-                        <div class="pt-2">
                             <button type="submit" class="w-full py-4 bg-primary text-black font-bold rounded-2xl hover:bg-primary/90 active:scale-[0.98] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3">
-                                <span>Request Order OTP</span>
+                                <span>Place Order</span>
                                 <span class="material-icons-round text-sm">arrow_forward</span>
                             </button>
                         </div>
                     </form>
                 </div>
             `;
-        } else if (step === 2) {
-            stepHtml = `
-                <div class="bg-white/80 dark:bg-surface-dark/80 backdrop-blur-xl w-full max-w-md rounded-3xl p-8 shadow-2xl border border-white/20 dark:border-gray-700/30 animate-in zoom-in-95 duration-300">
-                    <div class="flex justify-between items-start mb-8">
-                        <div>
-                            <h3 class="font-display font-bold text-3xl tracking-tight text-gray-900 dark:text-white">Verify OTP</h3>
-                            <p class="text-[10px] text-gray-500 mt-2 font-medium uppercase tracking-widest">Sent to <span class="text-primary font-bold">${phone}</span></p>
-                        </div>
-                        <button onclick="document.getElementById('booking-modal').remove()" class="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all active:scale-95"><span class="material-icons-round text-gray-400">close</span></button>
-                    </div>
-                    <form onsubmit="App.handleBookingVerify(event)" class="space-y-6">
-                        <div class="space-y-3">
-                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center">Enter 4-Digit Code</label>
-                            <div class="flex justify-center gap-3" id="otp-inputs">
-                                <input type="text" maxlength="1" class="otp-box" required autofocus onkeyup="App.handleOTPInput(this, event)">
-                                <input type="text" maxlength="1" class="otp-box" required onkeyup="App.handleOTPInput(this, event)">
-                                <input type="text" maxlength="1" class="otp-box" required onkeyup="App.handleOTPInput(this, event)">
-                                <input type="text" maxlength="1" class="otp-box" required onkeyup="App.handleOTPInput(this, event)">
-                            </div>
-                            <p class="text-[10px] text-primary font-bold text-center mt-4 uppercase tracking-[0.2em] animate-pulse">Waiting for OTP...</p>
-                            <p class="text-[9px] text-gray-400 text-center mt-2 uppercase tracking-widest">Message will be sent to your phone via SMS</p>
-                        </div>
-                        <div class="flex gap-3 pt-4">
-                            <button type="button" onclick="App._bookingState.step = 1; App.renderBookingStep();" class="flex-1 py-4 bg-black/5 dark:bg-white/5 text-gray-500 font-bold rounded-2xl hover:bg-black/10 transition-all">Back</button>
-                            <button type="submit" class="flex-[2] py-4 bg-primary text-black font-bold rounded-2xl hover:bg-primary/90 active:scale-[0.98] transition-all shadow-xl shadow-primary/20">Verify & Place Order</button>
-                        </div>
-                    </form>
-                </div>
-            `;
         }
+
 
         container.innerHTML = stepHtml;
     },
@@ -1182,61 +1183,10 @@ window.App = {
         this._bookingState.phone = f.phone.value;
         this._bookingState.place = f.place.value;
 
-        try {
-            const res = await fetch(`${this.API_BASE_URL}/api/otp/send`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone: this._bookingState.phone })
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                this._bookingState.step = 2;
-                this.renderBookingStep();
-            } else {
-                alert("SMS Delivery Error: " + (data.error || "Please check your SMS provider credentials."));
-            }
-        } catch (err) {
-            alert("Connection Error. Is the backend server running?");
-        }
+        this.submitBooking();
     },
 
-    handleOTPInput(input, e) {
-        if (e.key === 'Backspace' && !input.value && input.previousElementSibling) {
-            input.previousElementSibling.focus();
-        } else if (input.value && input.nextElementSibling) {
-            input.nextElementSibling.focus();
-        }
-    },
 
-    async handleBookingVerify(e) {
-        e.preventDefault();
-        const inputs = document.querySelectorAll('#otp-inputs input');
-        const code = Array.from(inputs).map(i => i.value).join('');
-        const phone = this._bookingState.phone;
-
-        if (code.length < 4) return;
-
-        try {
-            const res = await fetch(`${this.API_BASE_URL}/api/otp/verify`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone, code })
-            });
-
-            if (res.ok) {
-                this.submitBooking();
-            } else {
-                alert("Invalid OTP Code. Please check the server logs.");
-                inputs.forEach(i => { i.value = ''; i.classList.add('border-red-500'); });
-                inputs[0].focus();
-                setTimeout(() => inputs.forEach(i => i.classList.remove('border-red-500')), 1000);
-            }
-        } catch (err) {
-            alert("Verification Error.");
-        }
-    },
 
     async submitBooking() {
         const { itemName, itemPrice, phone, place } = this._bookingState;
@@ -1263,7 +1213,7 @@ window.App = {
                             <span class="material-icons-round text-5xl">check_circle</span>
                         </div>
                         <h3 class="font-display font-bold text-3xl text-gray-900 dark:text-white mb-2 uppercase">Order Placed!</h3>
-                        <p class="text-gray-500 dark:text-gray-400 mb-8 font-medium">Your order for <span class="text-primary font-bold">${itemName}</span> has been confirmed via OTP.</p>
+                        <p class="text-gray-500 dark:text-gray-400 mb-8 font-medium">Your order for <span class="text-primary font-bold">${itemName}</span> has been confirmed.</p>
                         <button onclick="document.getElementById('booking-modal').remove()" class="w-full py-4 bg-gray-900 dark:bg-white text-white dark:text-black font-bold rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all">Continue Browsing</button>
                     </div>
                 `;
@@ -1483,19 +1433,37 @@ window.App = {
     },
 
     setupMobileMenu() {
-        // Safe selection of mobile menu button: find the button that has a 'menu' icon
+        // Handle Mobile Drawer
         const menuButtons = document.querySelectorAll('button');
         const mBtn = Array.from(menuButtons).find(btn => btn.innerText.includes('menu'));
 
         if (mBtn) {
             mBtn.onclick = () => {
-                alert("For this demo, please use the bottom navigation bar on mobile devices.");
+                const drawer = document.getElementById('mobile-drawer');
+                const content = document.getElementById('drawer-content');
+                if (drawer && content) {
+                    drawer.classList.remove('pointer-events-none', 'opacity-0');
+                    content.classList.remove('translate-x-full');
+                }
+            };
+        }
+
+        // Listen for backdrop clicks
+        const drawer = document.getElementById('mobile-drawer');
+        if (drawer) {
+            drawer.onclick = (e) => {
+                if (e.target === drawer) this.closeMobileMenu();
             };
         }
     },
 
     closeMobileMenu() {
-        // Placeholder for mobile drawer closing
+        const drawer = document.getElementById('mobile-drawer');
+        const content = document.getElementById('drawer-content');
+        if (drawer && content) {
+            drawer.classList.add('pointer-events-none', 'opacity-0');
+            content.classList.add('translate-x-full');
+        }
     }
 };
 
