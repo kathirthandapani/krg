@@ -246,10 +246,10 @@ window.App = {
                 <div class="bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                     <div class="overflow-x-auto overflow-y-hidden">
                         <table class="w-full text-left min-w-[320px]">
-                            <thead class="bg-gray-50 dark:bg-gray-800/50 text-gray-400 uppercase text-[10px] md:text-xs font-bold tracking-wider">
+                            <thead class="sticky top-0 z-10 bg-gray-50 dark:bg-gray-800 text-gray-400 uppercase text-[10px] md:text-xs font-bold tracking-wider">
                                 <tr>
                                     <th class="px-4 md:px-6 py-4">Material</th>
-                                    <th class="px-4 md:px-6 py-4">Unit</th>
+                                    <th class="px-3 md:px-6 py-4">Unit</th>
                                     <th class="px-4 md:px-6 py-4 text-right">Price (₹)</th>
                                 </tr>
                             </thead>
@@ -260,7 +260,6 @@ window.App = {
                     </div>
                 </div>
                 <p class="mt-6 text-sm text-gray-400 text-center italic">* Rates are subject to change based on market availability and transport distance.</p>
-            </div>
             </div>
         `,
 
@@ -1483,6 +1482,20 @@ window.App = {
         } finally {
             btn.disabled = false;
             btn.innerHTML = originalHtml;
+        }
+    },
+
+    shareSite() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'KRG Building Materials',
+                text: 'Foundation for your future. Premium construction materials.',
+                url: window.location.origin
+            }).catch(console.error);
+        } else {
+            // Fallback: Copy to clipboard
+            navigator.clipboard.writeText(window.location.origin);
+            alert("Site URL copied to clipboard! Share it with your other devices.");
         }
     }
 };
