@@ -1118,7 +1118,7 @@ window.App = {
             step: 1,
             itemName,
             itemPrice,
-            phone: '',
+            phone: this.currentUser ? this.currentUser.phone : '',
             place: ''
         };
 
