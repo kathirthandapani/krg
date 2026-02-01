@@ -1107,12 +1107,6 @@ window.App = {
 
     // Booking Flow
     showBookingModal(itemName, itemPrice) {
-        if (!this.currentUser) {
-            alert("Login Required!\n\nPlease login or register to place an order for this item.");
-            window.location.hash = '#/login';
-            return;
-        }
-
         const existing = document.getElementById('booking-modal');
         if (existing) existing.remove();
 
@@ -1283,17 +1277,11 @@ window.App = {
 
             // Action Button Logic
             let actionBtn = "";
-            if (!isLoggedIn) {
-                actionBtn = isEquipment ?
-                    `<button onclick="window.location.hash='#/login'; event.stopPropagation();" class="px-4 py-2 rounded-xl bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-bold uppercase text-[10px] tracking-widest hover:bg-primary hover:text-black transition-all">Login to Book</button>` :
-                    `<button onclick="window.location.hash='#/login'; event.stopPropagation();" class="px-3 py-2 rounded-xl bg-gray-200 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-bold uppercase text-[9px] tracking-widest hover:bg-primary hover:text-black transition-all">Login to Order</button>`;
-            } else {
-                actionBtn = isEquipment ?
-                    `<button onclick="App.showBookingModal('${item.name.replace(/'/g, "\\'")}', '${displayPrice.replace(/'/g, "\\'")}'); event.stopPropagation();" class="px-4 py-2 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-black font-bold uppercase text-[10px] tracking-widest hover:bg-primary hover:text-black transition-all">Book Now</button>` :
-                    `<button onclick="App.showBookingModal('${item.name.replace(/'/g, "\\'")}', '${displayPrice.replace(/'/g, "\\'")}'); event.stopPropagation();" class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-black hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/10">
+            actionBtn = isEquipment ?
+                `<button onclick="App.showBookingModal('${item.name.replace(/'/g, "\\'")}', '${displayPrice.replace(/'/g, "\\'")}'); event.stopPropagation();" class="px-4 py-2 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-black font-bold uppercase text-[10px] tracking-widest hover:bg-primary hover:text-black transition-all">Book Now</button>` :
+                `<button onclick="App.showBookingModal('${item.name.replace(/'/g, "\\'")}', '${displayPrice.replace(/'/g, "\\'")}'); event.stopPropagation();" class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-black hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/10">
                         <span class="material-icons-round">shopping_cart</span>
                     </button>`;
-            }
 
             // Features Logic (if present)
             const featuresHtml = (item.features && item.features.length > 0) ? `
