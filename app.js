@@ -4,31 +4,15 @@ window.App = {
     // Views
     views: {
         home: `
-            <header class="relative w-full h-[70vh] sm:h-[80vh] md:h-[600px] flex items-center justify-center overflow-hidden">
+            <header class="relative w-full h-[70vh] sm:h-[80vh] md:h-[600px] flex items-end justify-center overflow-hidden pb-20">
                 <div class="absolute inset-0 z-0">
                     <img alt="KRG Building Materials" class="w-full h-full object-cover" src="assets/hero-bg.png"/>
-                    <div class="absolute inset-0 bg-black/30"></div>
+                    <div class="absolute inset-0 bg-black/10"></div>
                 </div>
                 
-                <div class="relative z-10 w-full max-w-7xl mx-auto px-6 text-center pt-20">
-                    <!-- Premium Label -->
-                    <h1 class="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-2 leading-none uppercase tracking-tighter drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]">
-                        Premium <span class="text-gray-300">Building</span> <br/>
-                        Materials
-                    </h1>
-                    
-                    <!-- Ampersand -->
-                    <div class="text-primary font-display font-bold text-4xl sm:text-5xl my-2 drop-shadow-lg">&</div>
-                    
-                    <!-- Professional Strip -->
-                    <div class="inline-block bg-primary px-6 sm:px-12 py-3 sm:py-4 transform -skew-x-12 shadow-2xl mb-8 border-y-4 border-black/10">
-                        <h2 class="font-display font-black text-2xl sm:text-4xl md:text-5xl text-black uppercase tracking-tight skew-x-12">
-                            Professional <span class="text-orange-950/80">Earth Moving</span>
-                        </h2>
-                    </div>
-
+                <div class="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
                     <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <a href="#/catalog" class="group px-8 py-4 bg-white text-black font-bold rounded-xl shadow-2xl hover:bg-primary transition-all flex items-center gap-3 active:scale-95">
                             EXPLORE CATALOG
                             <span class="material-icons-round group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -38,28 +22,6 @@ window.App = {
                              CALL NOW
                         </a>
                     </div>
-                </div>
-
-                <!-- Bottom Features Bar -->
-                <div class="absolute bottom-0 left-0 w-full z-20 overflow-hidden">
-                    <div class="bg-black/90 border-t-8 border-primary py-6 px-4">
-                         <div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-x-8 gap-y-2">
-                             <div class="flex items-center gap-2">
-                                 <div class="w-2 h-2 bg-primary rotate-45"></div>
-                                 <span class="font-display font-black text-lg sm:text-2xl text-white uppercase tracking-widest">Excavation</span>
-                             </div>
-                             <div class="flex items-center gap-2">
-                                 <div class="w-2 h-2 bg-primary rotate-45"></div>
-                                 <span class="font-display font-black text-lg sm:text-2xl text-white uppercase tracking-widest">Grading</span>
-                             </div>
-                             <div class="flex items-center gap-2">
-                                 <div class="w-2 h-2 bg-primary rotate-45"></div>
-                                 <span class="font-display font-black text-lg sm:text-2xl text-white uppercase tracking-widest">Site Clearing</span>
-                             </div>
-                         </div>
-                    </div>
-                    <!-- Hazard Stripes -->
-                    <div class="h-4 w-full" style="background: repeating-linear-gradient(-45deg, #FF9500, #FF9500 20px, #000 20px, #000 40px);"></div>
                 </div>
             </header>
 
